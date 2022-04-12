@@ -21,10 +21,25 @@ class Ship:
 
         # Load the ship image and get its rect
         self.image = pygame.image.load('images/ship.bmp')
+        self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
 
         # Init place each ship in the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # Movement flag
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        """
+        Updates the position of the ship based on the movement flag
+        """
+
+        if self.moving_right:
+            self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
     def blitme(self):
         """

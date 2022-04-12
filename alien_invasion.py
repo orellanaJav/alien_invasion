@@ -31,17 +31,41 @@ class AlienInvasion:
         """
 
         while True:
-            # Search for events in keyboard and mouse
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
+            self.ship.update()
+            self._update_screen()
 
-            # Redraw screen in every step by bucle
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+    def _check_events(self):
+        """
+        Search for events in keyboard and mouse
+        """
 
-            # Make visible the last screen drawed
-            pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    # Move ship to the right
+                    self.ship.moving_right = True
+                elif event.key == pygame.K_LEFT:
+                    # Move ship to the left
+                    self.ship.moving_left = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = False
+
+    def _update_screen(self):
+        """
+        Redraw screen in every step by bucle
+        """
+
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+        # Make visible the last screen drawed
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
