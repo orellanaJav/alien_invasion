@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 
 class AlienInvasion:
@@ -22,6 +23,8 @@ class AlienInvasion:
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption('Alien Invasion')
 
+        self.ship = Ship(self)
+
     def run_game(self):
         """
         Init the main bucle for the game
@@ -35,6 +38,7 @@ class AlienInvasion:
 
             # Redraw screen in every step by bucle
             self.screen.fill(self.settings.bg_color)
+            self.ship.blitme()
 
             # Make visible the last screen drawed
             pygame.display.flip()
