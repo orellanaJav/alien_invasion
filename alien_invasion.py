@@ -13,7 +13,7 @@ class AlienInvasion:
 
     def __init__(self):
         """
-        Init the game a create the resources
+        Init the game and create resources
         """
 
         pygame.init()
@@ -35,6 +35,30 @@ class AlienInvasion:
             self.ship.update()
             self._update_screen()
 
+    def _check_keydown_events(self, event):
+        """
+        Responds to keystrokes
+        """
+
+        if event.key == pygame.K_RIGHT:
+            # Move ship to the right
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            # Move ship to the left
+            self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            sys.exit()
+
+    def _check_keyup_events(self, event):
+        """
+        Responds to key releases
+        """
+
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
     def _check_events(self):
         """
         Search for events in keyboard and mouse
@@ -44,17 +68,9 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    # Move ship to the right
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:
-                    # Move ship to the left
-                    self.ship.moving_left = True
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
 
     def _update_screen(self):
         """
