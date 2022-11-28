@@ -11,7 +11,7 @@ class Bullet(Sprite):
         """
         Create an object for the bullet at the current position of the sip
         """
-        super.__init__()
+        super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.color = self.settings.bullet_color
@@ -20,7 +20,7 @@ class Bullet(Sprite):
         # position.
 
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
-                                self.settings.bullet_heigth)
+                                self.settings.bullet_height)
         self.rect.midtop = ai_game.ship.rect.midtop
 
         # Save the position of the bullet as decimal
